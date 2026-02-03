@@ -57,7 +57,7 @@ describe("transcribeSarvamAudio", () => {
 
   it("respects custom baseUrl", async () => {
     let seenUrl: string | null = null;
-    const fetchFn = async (input: RequestInfo | URL, init?: RequestInit) => {
+    const fetchFn = async (input: RequestInfo | URL, _init?: RequestInit) => {
       seenUrl = resolveRequestUrl(input);
       return new Response(
         JSON.stringify({ transcript: "ok" }),
@@ -82,8 +82,8 @@ describe("transcribeSarvamAudio", () => {
 
   it("sends language_code when provided", async () => {
     let seenInit: RequestInit | undefined;
-    const fetchFn = async (_input: RequestInfo | URL, init?: RequestInit) => {
-      seenInit = init;
+    const fetchFn = async (_input: RequestInfo | URL, _init?: RequestInit) => {
+      seenInit = _init;
       return new Response(
         JSON.stringify({ transcript: "namaste" }),
         {
@@ -109,8 +109,8 @@ describe("transcribeSarvamAudio", () => {
 
   it("sends correct model parameter", async () => {
     let seenInit: RequestInit | undefined;
-    const fetchFn = async (_input: RequestInfo | URL, init?: RequestInit) => {
-      seenInit = init;
+    const fetchFn = async (_input: RequestInfo | URL, _init?: RequestInit) => {
+      seenInit = _init;
       return new Response(
         JSON.stringify({ transcript: "test" }),
         {
@@ -136,8 +136,8 @@ describe("transcribeSarvamAudio", () => {
 
   it("handles query parameters for advanced features", async () => {
     let seenInit: RequestInit | undefined;
-    const fetchFn = async (_input: RequestInfo | URL, init?: RequestInit) => {
-      seenInit = init;
+    const fetchFn = async (_input: RequestInfo | URL, _init?: RequestInit) => {
+      seenInit = _init;
       return new Response(
         JSON.stringify({ transcript: "speaker 1: hello" }),
         {
@@ -196,8 +196,8 @@ describe("transcribeSarvamAudio", () => {
 
   it("handles mime type correctly", async () => {
     let seenInit: RequestInit | undefined;
-    const fetchFn = async (_input: RequestInfo | URL, init?: RequestInit) => {
-      seenInit = init;
+    const fetchFn = async (_input: RequestInfo | URL, _init?: RequestInit) => {
+      seenInit = _init;
       return new Response(
         JSON.stringify({ transcript: "test" }),
         {
