@@ -15,9 +15,9 @@ describe("transcribeSarvamAudio", () => {
   it("builds the expected request with default options", async () => {
     let seenUrl: string | null = null;
     let seenInit: RequestInit | undefined;
-    const fetchFn = async (input: RequestInfo | URL, init?: RequestInit) => {
+    const fetchFn = async (input: RequestInfo | URL, _init?: RequestInit) => {
       seenUrl = resolveRequestUrl(input);
-      seenInit = init;
+      seenInit = _init;
       return new Response(
         JSON.stringify({ transcript: "hello world" }),
         {
@@ -170,8 +170,8 @@ describe("transcribeSarvamAudio", () => {
 
   it("respects api-subscription-key header override", async () => {
     let seenApiKey: string | null = null;
-    const fetchFn = async (_input: RequestInfo | URL, init?: RequestInit) => {
-      const headers = new Headers(init?.headers);
+    const fetchFn = async (_input: RequestInfo | URL, _init?: RequestInit) => {
+      const headers = new Headers(_init?.headers);
       seenApiKey = headers.get("api-subscription-key");
       return new Response(
         JSON.stringify({ transcript: "ok" }),
